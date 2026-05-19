@@ -13,6 +13,27 @@
 	"upload_source_maps": true,
 	"compatibility_flags": [
 		"nodejs_compat"
+	],
+	// Declare the Durable Object binding
+	"durable_objects": {
+		"bindings": [
+			{
+				"name": "SESSIONS",
+				// how you reference it in code: env.SESSIONS
+				"class_name": "EditorSession"
+				// must match the exported class name exactly
+			}
+		]
+	},
+	// Tell Cloudflare to create a new DO namespace on first deploy
+	"migrations": [
+		{
+			"tag": "v1",
+			"new_sqlite_classes": [
+				"EditorSession"
+			]
+			// SQLite backend = free tier
+		}
 	]
 	/**
 	 * Smart Placement
